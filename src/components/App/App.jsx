@@ -1,13 +1,29 @@
-import React from "react";
-import Searchbar from "../Searchbar/Searchbar";
-import {Wrapper} from "./App.styled"
+import React, { Component } from "react";
+import SearchBar from "../SearchBar";
+import { Wrapper } from "./App.styled";
 
-function App() {
-  return (
-    <Wrapper>
-      <Searchbar />
-    </Wrapper>
-  );
+class App extends Component {
+  state = {
+    searchImg: "",
+    page: 1,
+    images: [],
+  };
+
+  handleChangeSearch = (searchImg) => {
+    this.setState({
+      searchImg,
+      page: 1,
+      images: [],
+    });
+  };
+
+  render() {
+    return (
+      <Wrapper>
+        <SearchBar onHandleSubmit={this.handleChangeSearch} />
+      </Wrapper>
+    );
+  }
 }
 
 export default App;
