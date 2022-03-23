@@ -3,6 +3,7 @@ import SearchBar from "../SearchBar";
 import { Wrapper } from "./App.styled";
 import getImg from "../../servises/api";
 import ImageGallery from "../ImageGallery";
+import Modal from "../Modal";
 
 class App extends Component {
   state = {
@@ -10,6 +11,8 @@ class App extends Component {
     page: 1,
     images: [],
     loading: false,
+    showModal: false,
+    modalImage: "",
   };
 
   componentDidUpdate(prevProps, { searchQuery, page }) {
@@ -52,12 +55,26 @@ class App extends Component {
     }
   };
 
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({ showModal: !showModal }));
+  };
+
+  handleImageClick = (image) => {
+    this.setState({ modalImage: image });
+    this.toggleModal();
+  };
+
   render() {
-    const { images } = this.state;
+    const { images, showModal, modalImage } = this.state;
     return (
       <Wrapper>
         <SearchBar onSubmit={this.handleChangeSearch} />
-        {images.length > 0 && <ImageGallery images={images} />}
+        {images.length > 0 && (
+          <ImageGallery images={images} onImageClick={this.handleImageClick} />
+        )}
+        {showModal && (
+          <Modal largeImg={modalImage} onClose={this.toggleModal} />
+        )}
       </Wrapper>
     );
   }

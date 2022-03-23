@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
-import {GalleryItem, GalleryItemImage} from "./ImageGalleryItem.styled"
+import { GalleryItem, GalleryItemImage } from "./ImageGalleryItem.styled";
 
-const ImageGalleryItem = ({ src }) => {
+const ImageGalleryItem = ({ src, onImageClick, modalImage }) => {
   return (
-    <GalleryItem>
+    <GalleryItem onClick={() => onImageClick(modalImage)}>
       <GalleryItemImage src={src} alt="" />
     </GalleryItem>
   );
