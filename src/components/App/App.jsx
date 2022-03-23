@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import SearchBar from "../SearchBar";
 import { Wrapper } from "./App.styled";
 import getImg from "../../servises/api";
+import ImageGallery from "../ImageGallery";
 
 class App extends Component {
   state = {
@@ -52,9 +53,11 @@ class App extends Component {
   };
 
   render() {
+    const { images } = this.state;
     return (
       <Wrapper>
         <SearchBar onSubmit={this.handleChangeSearch} />
+        {images.length > 0 && <ImageGallery images={images} />}
       </Wrapper>
     );
   }
