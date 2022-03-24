@@ -5,6 +5,7 @@ import getImg from "../../servises/api";
 import ImageGallery from "../ImageGallery";
 import Modal from "../Modal";
 import Button from "../Button";
+import Loader from "../Loader";
 
 class App extends Component {
   state = {
@@ -70,7 +71,7 @@ class App extends Component {
   };
 
   render() {
-    const { images, showModal, modalImage, page } = this.state;
+    const { images, showModal, modalImage, page, loading } = this.state;
     return (
       <Wrapper>
         <SearchBar onSubmit={this.handleChangeSearch} />
@@ -83,6 +84,7 @@ class App extends Component {
         {images.length > 0 && images.length / page === 12 && (
           <Button onButtonClick={this.handlerLoadMore} />
         )}
+        {loading && <Loader/>}
       </Wrapper>
     );
   }
