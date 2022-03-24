@@ -4,6 +4,7 @@ import { Wrapper } from "./App.styled";
 import getImg from "../../servises/api";
 import ImageGallery from "../ImageGallery";
 import Modal from "../Modal";
+import Button from "../Button";
 
 class App extends Component {
   state = {
@@ -64,8 +65,12 @@ class App extends Component {
     this.toggleModal();
   };
 
+  handlerLoadMore = () => {
+    this.setState(({ page }) => ({ page: page + 1 }));
+  };
+
   render() {
-    const { images, showModal, modalImage } = this.state;
+    const { images, showModal, modalImage, page } = this.state;
     return (
       <Wrapper>
         <SearchBar onSubmit={this.handleChangeSearch} />
@@ -74,6 +79,9 @@ class App extends Component {
         )}
         {showModal && (
           <Modal largeImg={modalImage} onClose={this.toggleModal} />
+        )}
+        {images.length > 0 && images.length / page === 12 && (
+          <Button onButtonClick={this.handlerLoadMore} />
         )}
       </Wrapper>
     );
