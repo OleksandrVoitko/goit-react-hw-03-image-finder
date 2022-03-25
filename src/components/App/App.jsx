@@ -1,12 +1,12 @@
 import { Component } from "react";
 import SearchBar from "../SearchBar";
 import { Wrapper } from "./App.styled";
-import getImg from "../../servises/api";
+import getImg from "../../services/api";
 import ImageGallery from "../ImageGallery";
 import Modal from "../Modal";
 import Button from "../Button";
 import Loader from "../Loader";
-
+import { IMG_PER_PAGE } from "../../services/constants";
 class App extends Component {
   state = {
     searchQuery: "",
@@ -72,6 +72,7 @@ class App extends Component {
 
   render() {
     const { images, showModal, modalImage, page, loading } = this.state;
+
     return (
       <Wrapper>
         <SearchBar onSubmit={this.handleChangeSearch} />
@@ -81,10 +82,10 @@ class App extends Component {
         {showModal && (
           <Modal largeImg={modalImage} onClose={this.toggleModal} />
         )}
-        {images.length > 0 && images.length / page === 12 && (
+        {images.length > 0 && images.length / page === IMG_PER_PAGE && (
           <Button onButtonClick={this.handlerLoadMore} />
         )}
-        {loading && <Loader/>}
+        {loading && <Loader />}
       </Wrapper>
     );
   }

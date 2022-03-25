@@ -5,6 +5,7 @@ import {
   SearchFormButton,
   SearchFormInput,
 } from "./SearchBar.styled";
+import { ImSearch } from "react-icons/im";
 
 class SearchBar extends Component {
   state = {
@@ -27,7 +28,10 @@ class SearchBar extends Component {
       <SearchBarHeader>
         <SearchForm onSubmit={this.handleSubmit}>
           <SearchFormButton type="submit">
-            <span>S</span>
+            <ImSearch
+              style={{ width: 20, height: 20, marginLeft: 4, marginTop: 8 }}
+            />
+            {/* <span>S</span> */}
           </SearchFormButton>
 
           <SearchFormInput
